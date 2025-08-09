@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Красивый слайдер изображений</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        .slider-container {
+            width: 800px;
+            max-width: 90%;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 500px;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+        }
+
+        .btn {
+            background-color: rgba(255, 255, 255, 0.7);
+            color: #333;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            transform: scale(1.05);
+        }
+
+        .counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        max-width: 768px {
+            .slider-container {
+                height: 300px;
+            }
+            
+            .btn {
+                width: 40px;
+                height: 40px;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide"><img src="https://cs12.pikabu.ru/post_img/2022/01/03/8/og_og_1641215011270078518.jpg" alt="мем 1"></div>
+            <div class="slide"><img src="https://i.pinimg.com/originals/7c/17/37/7c17372abfc227921caa9fcd5e28ff9a.jpg" alt="мем 2"></div>
+            <div class="slide"><img src="https://i.ytimg.com/vi/em41kgwRsxs/maxresdefault.jpg" alt="мем 3"></div>
+            <div class="slide"><img src="https://i.pinimg.com/originals/4a/be/7e/4abe7e92143ef0c02198c7e4218dc5a6.jpg" alt="мем 4"></div>
+            <div class="slide"><img src="https://i.pinimg.com/736x/a6/ea/c5/a6eac54caa4433534be35015d88d2d4f.jpg" alt="мем 5"></div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn prev-btn">❮</button>
+            <button class="btn next-btn">❯</button>
+        </div>
+        
+        <div class="counter">Изображение 1 из 5</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slider = document.querySelector('.slider');
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            const counter = document.querySelector('.counter');
+
+
+let currentIndex = 0;
+            const totalSlides = slides.length;
+            
+            // Обновление счетчика
+            function updateCounter() {
+                counter.textContent = `Изображение ${currentIndex + 1} из ${totalSlides}`;
+            }
+            
+            // Переход к слайду
+            function goToSlide(index) {
+                if (index < 0) {
+                    currentIndex = totalSlides - 1;
+                } else if (index >= totalSlides) {
+                    currentIndex = 0;
+                } else {
+                    currentIndex = index;
+                }
+                
+                slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+                updateCounter();
+            }
+            
+            // Следующий слайд
+            function nextSlide() {
+                goToSlide(currentIndex + 1);
+            }
+            
+            // Предыдущий слайд
+            function prevSlide() {
+                goToSlide(currentIndex - 1);
+            }
+            
+            // Обработчики событий
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+            
+            // Инициализация
+            updateCounter();
+            
+            // Автоматическая прокрутка (опционально)
+            // setInterval(nextSlide, 3000);
+        });
+    </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Красивый слайдер изображений</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        .slider-container {
+            width: 800px;
+            max-width: 90%;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            overflow: hidden;
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            height: 500px;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+        }
+
+        .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .controls {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 20px;
+        }
+
+        .btn {
+            background-color: rgba(255, 255, 255, 0.7);
+            color: #333;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            transform: scale(1.05);
+        }
+
+        .counter {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(0, 0, 0, 0.6);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        max-width: 768px {
+            .slider-container {
+                height: 300px;
+            }
+            
+            .btn {
+                width: 40px;
+
+
+height: 40px;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slider">
+            <div class="slide"><img src="https://i.pinimg.com/736x/eb/43/59/eb4359ea95cabd94773519e2a79a7d9c.jpg" alt=" Геройка 1"></div>
+            <div class="slide"><img src="https://i.pinimg.com/736x/6e/5a/c8/6e5ac8102d10e988e58266e0bc29dc79.jpg" alt="Геройка 2 "></div>
+            <div class="slide"><img src="https://i.pinimg.com/originals/7f/bf/0a/7fbf0a8f83feb412405ca8c8792a7452.jpg" alt=" Кот  3"></div>
+            <div class="slide"><img src="https://i.pinimg.com/736x/2a/b8/1f/2ab81f7f19c63308db70ee20a891c639.jpg" alt=" Кот 4"></div>
+            <div class="slide"><img src="https://i.pinimg.com/736x/da/94/7c/da947ce466c9558b37d2777129f3e4a3.jpg" alt="Кот 5"></div>
+        </div>
+        
+        <div class="controls">
+            <button class="btn prev-btn">❮</button>
+            <button class="btn next-btn">❯</button>
+        </div>
+        
+        <div class="counter">Изображение 1 из 5</div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const slider = document.querySelector('.slider');
+            const slides = document.querySelectorAll('.slide');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            const counter = document.querySelector('.counter');
+            
+            let currentIndex = 0;
+            const totalSlides = slides.length;
+            
+            // Обновление счетчика
+            function updateCounter() {
+                counter.textContent = `Изображение ${currentIndex + 1} из ${totalSlides}`;
+            }
+            
+            // Переход к слайду
+            function goToSlide(index) {
+                if (index < 0) {
+                    currentIndex = totalSlides - 1;
+                } else if (index >= totalSlides) {
+                    currentIndex = 0;
+                } else {
+                    currentIndex = index;
+                }
+                
+                slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+                updateCounter();
+            }
+            
+            // Следующий слайд
+            function nextSlide() {
+                goToSlide(currentIndex + 1);
+            }
+            
+            // Предыдущий слайд
+            function prevSlide() {
+                goToSlide(currentIndex - 1);
+            }
+            
+            // Обработчики событий
+            nextBtn.addEventListener('click', nextSlide);
+            prevBtn.addEventListener('click', prevSlide);
+            
+            // Инициализация
+            updateCounter();
+            
+            // Автоматическая прокрутка (опционально)
+            // setInterval(nextSlide, 3000);
+        });
+    </script>
+</body>
+</html>
